@@ -1,3 +1,103 @@
+# Market Sentiment Dynamic Fee Hook
+
+This is a Uniswap V4 hook that dynamically adjusts pool fees based on market sentiment data from CoinMarketCap. The hook DECREASES fees during bullish market conditions and INCREASES them during bearish conditions in order to optimize pool performance!
+
+## Features
+
+- Dynamic fee adjustment based on market sentiment
+- Integration with CoinMarketCap API for real-time market data
+- Configurable sentiment thresholds and fee ranges
+- Pausable oracle for emergency situations
+- Confidence scoring for sentiment data
+
+## Prerequisites
+
+- Node.js v16 or higher
+- A CoinMarketCap API key
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/sweet-hook.git
+cd sweet-hook
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Copy the environment file and fill in your values:
+```bash
+cp .env.example .env
+```
+
+## Configuration
+
+Edit the `.env` file with your values:
+- `COINMARKETCAP_API_KEY`: Your CoinMarketCap API key
+- `ORACLE_ADDRESS`: The deployed MarketSentimentOracle contract address
+- `MAINNET_RPC_URL`: Your Ethereum node RPC URL
+- `PRIVATE_KEY`: Your wallet private key (for deployment)
+
+## Usage
+
+### First deploy the poolmanager
+```bash
+npx hardhat run scripts/deploy-poolmanager.ts --network unichain-sepolia
+```
+
+
+### Then deploy the Contracts
+
+1. Deploy the MarketSentimentOracle:
+```bash
+npx hardhat run scripts/deploy-oracle.ts --network mainnet
+```
+
+2. Deploy the MarketSentimentHook:
+```bash
+npx hardhat run scripts/deploy-hook.ts --network mainnet
+```
+
+3. Deploy the hook
+```bash
+npx hardhat run scripts/create-pool.ts --network unichain-sepolia
+```
+
+### Updating Market Sentiment
+
+Run the script to update market sentiment data:
+```bash
+npm run update-sentiment
+```
+
+This script will:
+1. Fetch current market data from CoinMarketCap
+2. Calculate sentiment based on price and volume changes
+3. Update the oracle contract with new sentiment values
+
+### Fee Adjustment Logic
+
+The hook adjusts fees based on the following rules:
+- Base fee: 0.03%
+- Maximum fee: 1%
+- Minimum fee: 0.03%
+- Bullish threshold: 70 (decreases fee by 20%)
+- Bearish threshold: 30 (increases fee by 20%)
+
+## Security Considerations
+
+- The oracle is pausable in case of emergencies
+- Sentiment data has a maximum age of 1 hour
+- Confidence scoring helps filter out unreliable data
+- Only the owner can update sentiment data
+
+## License
+
+MIT
+
 # v4-template
 ### **A template for writing Uniswap v4 Hooks 🦄**
 

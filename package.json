@@ -1,0 +1,25 @@
+{
+  "name": "sweet-hook",
+  "version": "1.0.0",
+  "description": "Uniswap V4 hook for dynamic fee adjustment based on market sentiment",
+  "scripts": {
+    "update-sentiment": "ts-node script/updateMarketSentiment.ts"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "@uniswap/v4-core": "^1.0.0",
+    "@uniswap/v4-periphery": "^1.0.1",
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.1",
+    "hardhat": "^2.19.4"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.8",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.13",
+    "@types/node": "^20.11.16",
+    "ethers": "^6.13.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
