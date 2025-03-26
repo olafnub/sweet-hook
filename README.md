@@ -1,3 +1,6 @@
+# Demo Video
+https://youtu.be/Ejt-1HBWPbI
+
 # Market Sentiment Dynamic Fee Hook
 
 This is a Uniswap V4 hook that dynamically adjusts pool fees based on market sentiment data from CoinMarketCap. The hook DECREASES fees during bullish market conditions and INCREASES them during bearish conditions in order to optimize pool performance!
